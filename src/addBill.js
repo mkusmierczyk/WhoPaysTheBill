@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import * as firebase from 'firebase';
 
 function AddBill() {
-    const [amount, setAmount] = useState('')
-    const [month, setMonth] = useState("")
-    const [recipient, setRecipient] = useState("")
+    const [amount, setAmount] = useState(0)
+    const [month, setMonth] = useState('Październik')
+    const [recipient, setRecipient] = useState('Gaz')
     const [record, setRecord] = useState(false)
 
     const submit = () => {
         setRecord({
-            amountOfBill: amount,
+            amountOfBill: +amount,
             monthOfBill: month,
             recipientOfBill: recipient,
         })}

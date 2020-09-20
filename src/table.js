@@ -4,15 +4,15 @@ import BillsDisplay from "./billsDisplay";
 import * as firebase from "firebase";
 
 function Table() {
-    const [billsData, setBillsData] = useState(false)
+    const [billsData, setBillsData] = useState([])
     useEffect(() => {
         const fetchData = async () => {
             const db = firebase.firestore()
-            const data = await db.collection("mateusz").get()
-
-            setBillsData(data.docs.map(doc => ({...doc.data(), id: doc.id})))
-        }
-        fetchData()
+            const data = await db.collection("mateusz").get();
+            const mappedData = data.docs.map(doc => ({...doc.data(), id: doc.id}));
+            setBillsData(mappedData);
+        };
+        fetchData();
     }, [])
     console.log(billsData);
 
