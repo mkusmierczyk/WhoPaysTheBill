@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
-import * as firebase from 'firebase'
+import IsPaid from './isPaid';
 
-    function BillsDisplay(billsData) {
-        const data = billsData.billsData;
+    function BillsDisplay(props) {
+        const data = props.billsData;
         let amountSum = 0;
         data.forEach(x => amountSum += x.billData.amountOfBill);
         return (
             <>
+                {/*szukajka*/}
                 <table>
                     <caption>Zestawienie rachunków</caption>
                     <thead>
@@ -14,14 +15,16 @@ import * as firebase from 'firebase'
                         <th>Miesiąc</th>
                         <th>Kwota</th>
                         <th>Odbiorca</th>
+                        <th>Zapłacono</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {billsData !== false && data.map((bill) =>
+                    {props !== false && data.map((bill) =>
                     <tr key={bill.id}>
                         <td> {bill.billData.monthOfBill} </td>
                         <td> {bill.billData.amountOfBill} zł</td>
                         <td> {bill.billData.recipientOfBill}</td>
+                        <IsPaid/>
                     </tr>)}
                     </tbody>
                     <tfoot>
