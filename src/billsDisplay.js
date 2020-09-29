@@ -7,9 +7,6 @@ import * as firebase from "firebase";
         // const [isPaidCheckbox, setIsPaidCheckbox] = useState(true )
         props.billsData.forEach(x => amountSum += x.amountOfBill);
 
-
-
-
         return (
             <>
                 {/*<input type={"checkbox"} value={isPaidCheckbox}*/}

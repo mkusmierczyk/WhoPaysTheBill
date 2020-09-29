@@ -14,7 +14,7 @@ function AddBill() {
             amountOfBill: +amount,
             monthOfBill: month,
             recipientOfBill: recipient,
-            isPaid: 0,
+            isPaid: false,
         })}
 
     useEffect(() =>{
