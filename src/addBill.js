@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import * as firebase from 'firebase';
 
 function AddBill() {
+    const [clientID, setClientID] = useState("ID")
     const [amount, setAmount] = useState(0)
     const [month, setMonth] = useState('Październik')
     const [recipient, setRecipient] = useState('Gaz')
@@ -9,9 +10,11 @@ function AddBill() {
 
     const submit = () => {
         setRecord({
+            clientId : clientID,
             amountOfBill: +amount,
             monthOfBill: month,
             recipientOfBill: recipient,
+            isPaid: 0,
         })}
 
     useEffect(() =>{
@@ -21,7 +24,7 @@ function AddBill() {
                 return (value === undefined) ? "" : value
             });
             let billData = JSON.parse(updatedList);
-            db.collection("mateusz").add({billData})
+            db.collection("bills").add(billData)
         }},[record])
 
     return (

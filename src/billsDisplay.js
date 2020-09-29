@@ -1,12 +1,19 @@
 import React, {useEffect, useState} from "react";
 import IsPaid from './isPaid';
+import * as firebase from "firebase";
 
     function BillsDisplay(props) {
-        const data = props.billsData;
         let amountSum = 0;
-        data.forEach(x => amountSum += x.billData.amountOfBill);
+        // const [isPaidCheckbox, setIsPaidCheckbox] = useState(true )
+        props.billsData.forEach(x => amountSum += x.amountOfBill);
+
+
+
+
         return (
             <>
+                {/*<input type={"checkbox"} value={isPaidCheckbox}*/}
+                {/*       onClick={() => setIsPaidCheckbox(!isPaidCheckbox) } checked={isPaidCheckbox}/>*/}
                 {/*szukajka*/}
                 <table>
                     <caption>Zestawienie rachunków</caption>
@@ -19,12 +26,12 @@ import IsPaid from './isPaid';
                     </tr>
                     </thead>
                     <tbody>
-                    {props !== false && data.map((bill) =>
+                    {props !== false && props.billsData.map((bill) =>
                     <tr key={bill.id}>
-                        <td> {bill.billData.monthOfBill} </td>
-                        <td> {bill.billData.amountOfBill} zł</td>
-                        <td> {bill.billData.recipientOfBill}</td>
-                        <IsPaid/>
+                        <td> {bill.monthOfBill} </td>
+                        <td> {bill.amountOfBill} zł</td>
+                        <td> {bill.recipientOfBill}</td>
+                        <IsPaid bill={ bill }/>
                     </tr>)}
                     </tbody>
                     <tfoot>

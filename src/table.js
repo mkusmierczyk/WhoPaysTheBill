@@ -8,7 +8,7 @@ function Table() {
     useEffect(() => {
         const fetchData = async () => {
             const db = firebase.firestore()
-            const data = await db.collection("mateusz").get();
+            const data = await db.collection("bills").get();
             const mappedData = data.docs.map(doc => ({...doc.data(), id: doc.id}));
             setBillsData(mappedData);
         };
