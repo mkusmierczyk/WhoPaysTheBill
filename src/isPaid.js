@@ -6,8 +6,9 @@ function IsPaid({bill}) {
     const db = firebase.firestore()
     useEffect(() => {
         setChangeIsPaid(!bill.isPaid)
-
     }, [isPaid])
+
+
 
     return (
         <>
@@ -17,5 +18,4 @@ function IsPaid({bill}) {
     )
 
 }
-
 export default IsPaid
