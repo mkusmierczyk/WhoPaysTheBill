@@ -10,25 +10,20 @@ function BillsDisplay({billsData}) {
     console.log(Date.parse(new Date(filterEnd.slice(0,4), filterEnd.slice(6,7), filterEnd.slice(8,10))));
     billsData.map(x => console.log(Date.parse(x.monthOfBill)));
     let amountSum = 0;
-    billsData.forEach(x => amountSum += x.amountOfBill);
+    filterData.forEach(x => amountSum += x.amountOfBill);
 
 
 console.log([(filterStart.slice(0,4)), (filterStart.slice(5,7)), (filterStart.slice(8,10))])
     console.log(filterData);
     useEffect(()=>{
-        if(filterData){
-
-        }
-
-},[filterStart,filterEnd])
-
-
-
-    const billFilter = billsData.filter(bill=>{
+  setFilterData( billsData.filter(bill=>{
         return ((Date.parse(bill.monthOfBill)) > (Date.parse(new Date([(filterStart.slice(0,4)), (filterStart.slice(5,7)), (filterStart.slice(8,10))]) ))
             && ((Date.parse(bill.monthOfBill)) < (Date.parse(new Date([(filterEnd.slice(0,4)), (filterEnd.slice(5,7)), (filterEnd.slice(8,10))]) ))))
-    })
-console.log(billFilter)
+    }))
+
+},[filterStart,filterEnd,billsData])
+
+
 
     // const onlyMoviesNonWS = props.filter(movie => {
     //     return
@@ -53,7 +48,7 @@ console.log(billFilter)
                         </tr>
                         </thead>
                         <tbody>
-                        {billsData !== false && billsData.map((bill) =>
+                        {filterData !== false && filterData.map((bill) =>
                         <tr key={bill.id}>
                             <td> {bill.monthOfBill.slice(0,10)} </td>
                             <td> {bill.amountOfBill} zł</td>
