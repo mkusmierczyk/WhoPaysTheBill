@@ -1,15 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-function SearchBill({billsData,billFilter}) {
-    const [filterStart, setFilterStart] = useState("2019-03-13");
-    const [filterEnd, setFilterEnd] = useState((new Date().toISOString().slice(0, 10)));
-
-
-    useEffect(()=>{
-
-        billFilter(billsData, setFilterStart, setFilterEnd)
-
-    },[filterStart, filterEnd])
+function SearchBill({filterStart, setFilterStart, filterEnd, setFilterEnd}) {
 
     return (
         <>
@@ -21,7 +12,7 @@ function SearchBill({billsData,billFilter}) {
                 </label>
                 <label > do:
                     <input type="date" value={filterEnd}
-                           onChange={(event) => setFilterEnd(event.target.value)}/>/>
+                           onChange={(event) => setFilterEnd( event.target.value)}/>/>
                 </label>
             </div>
         </>

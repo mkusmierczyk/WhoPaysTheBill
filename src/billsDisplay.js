@@ -3,15 +3,32 @@ import IsPaid from './isPaid';
 import SearchBill from "./searchBill";
 
 function BillsDisplay({billsData}) {
-
+    const [filterStart, setFilterStart] = useState("2020-01-20");
+    const [filterEnd, setFilterEnd] = useState((new Date().toISOString().slice(0, 10)));
+    const [filterData, setFilterData] = useState(billsData)
+    console.log(Date.parse(new Date(filterStart.slice(0,4), filterStart.slice(6,7), filterStart.slice(8,10)) ));
+    console.log(Date.parse(new Date(filterEnd.slice(0,4), filterEnd.slice(6,7), filterEnd.slice(8,10))));
+    billsData.map(x => console.log(Date.parse(x.monthOfBill)));
     let amountSum = 0;
     billsData.forEach(x => amountSum += x.amountOfBill);
 
-function billFilter(props, filterStart,filterEnd) {props.filter(bill=>{
-    return(Date.parse(bill.monthOfBill) > (Date.parse(filterStart + "T00:00:00"))
-                && Date.parse(bill.monthOfBill) < (Date.parse(filterEnd + "T23:59:59")))
-})
-}
+
+console.log([(filterStart.slice(0,4)), (filterStart.slice(5,7)), (filterStart.slice(8,10))])
+    console.log(filterData);
+    useEffect(()=>{
+        if(filterData){
+
+        }
+
+},[filterStart,filterEnd])
+
+
+
+    const billFilter = billsData.filter(bill=>{
+        return ((Date.parse(bill.monthOfBill)) > (Date.parse(new Date([(filterStart.slice(0,4)), (filterStart.slice(5,7)), (filterStart.slice(8,10))]) ))
+            && ((Date.parse(bill.monthOfBill)) < (Date.parse(new Date([(filterEnd.slice(0,4)), (filterEnd.slice(5,7)), (filterEnd.slice(8,10))]) ))))
+    })
+console.log(billFilter)
 
     // const onlyMoviesNonWS = props.filter(movie => {
     //     return
@@ -24,7 +41,7 @@ function billFilter(props, filterStart,filterEnd) {props.filter(bill=>{
     return (
         <>
                 <div>
-                    <SearchBill billsData={billsData} billFilter={billFilter}/>
+                    <SearchBill filterStart={filterStart} setFilterStart={setFilterStart} filterEnd={filterEnd} setFilterEnd={setFilterEnd}/>
                     <table>
                         <caption>Zestawienie rachunków</caption>
                         <thead>
@@ -38,7 +55,7 @@ function billFilter(props, filterStart,filterEnd) {props.filter(bill=>{
                         <tbody>
                         {billsData !== false && billsData.map((bill) =>
                         <tr key={bill.id}>
-                            <td> {bill.monthOfBill.seconds} </td>
+                            <td> {bill.monthOfBill.slice(0,10)} </td>
                             <td> {bill.amountOfBill} zł</td>
                             <td> {bill.recipientOfBill}</td>
                             <IsPaid bill={bill}/>

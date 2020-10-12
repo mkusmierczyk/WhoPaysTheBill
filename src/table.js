@@ -14,7 +14,6 @@ function Table() {
         };
         fetchData();
     }, [])
-    console.log(billsData);
 
     return (
         <>
