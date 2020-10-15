@@ -8,8 +8,6 @@ function IsPaid({bill}) {
         setChangeIsPaid(!bill.isPaid)
     }, [isPaid])
 
-
-
     return (
         <>
                 <input type={'checkbox'} value={!isPaid}  checked={!isPaid}
