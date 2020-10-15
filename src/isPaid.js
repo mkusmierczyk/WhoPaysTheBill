@@ -14,6 +14,5 @@ function IsPaid({bill}) {
                    onClick={() => (db.collection("bills").doc(bill.id).set({...bill, isPaid})) }/>
         </>
     )
-
 }
 export default IsPaid

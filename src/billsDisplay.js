@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import IsPaid from './isPaid';
 import SearchBill from "./searchBill";
 import TableFoot from "./tableFoot";
+import ClientChange from "./clientChange";
 
 function BillsDisplay({ billsData }) {
     const [filterStart, setFilterStart] = useState("2020-01-20");
@@ -68,6 +69,7 @@ function BillsDisplay({ billsData }) {
     return (
         <>
             <div>
+                <ClientChange filterData = {filterData} />
                 <SearchBill filterStart={filterStart} setFilterStart={setFilterStart} filterEnd={filterEnd} setFilterEnd={setFilterEnd} />
                 <table>
                     <caption>Zestawienie rachunków</caption>
