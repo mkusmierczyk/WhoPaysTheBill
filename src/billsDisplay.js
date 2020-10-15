@@ -21,79 +21,60 @@ function BillsDisplay({ billsData }) {
 
 
     const [ascDesc, setAscDsc] = useState("asc")
-    const [fieldSort, setFieldSort] = useState(false)
-
-    // const [sortedField, setSortedField] = useState(null)
-    // const [sortConfig, setSortConfig] = React.useState(null);
+    const [col, setCol] = useState("")
 
 
-    // let sortedProducts = [...filterData];
-    // if (sortedField !== null) {
-    //     sortedProducts.sort((a, b) => {
-    //         if (a[sortedField] < b[sortedField]) {
-    //             return -1;
-    //         }
-    //         if (a[sortedField] > b[sortedField]) {
-    //             return 1;
-    //         }
-    //         return 0;
-    //     });
-    // }
-
-    //     sortedProducts.sort((a, b) => {
-    //         if (a[sortConfig.key] < b[sortConfig.key]) {
-    //             return sortConfig.direction === 'ascending' ? -1 : 1;
-    //         }
-    //         if (a[sortConfig.key] > b[sortConfig.key]) {
-    //             return sortConfig.direction === 'ascending' ? 1 : -1;
-    //         }
-    //         return 0;
-    //     });
-
-    //     const requestSort = (key) => {
-    //         let direction = 'ascending';
-    //         if (
-    //           sortConfig &&
-    //           sortConfig.key === key &&
-    //           sortConfig.direction === 'ascending'
-    //         ) {
-    //           direction = 'descending';
-    //         }
-    //         setSortConfig({ key, direction });
-    //       };
-
-    //       return { items: sortedItems, requestSort, sortConfig };
-    //     };
-
-
-    //       const { items, requestSort, sortConfig } = useSortableData(filterData);
-    //       const getClassNamesFor = (name) => {
-    //         if (!sortConfig) {
-    //           return;
-    //         }
-    //         return sortConfig.key === name ? sortConfig.direction : undefined;
-    //       };
-
-
-    const sortBy = (key) => {
-
-
-        setAscDsc(filterData.sort((a, b) => 
+    const sortByDate = () => {
+        setFilterData(filterData.sort((a, b) =>
             ascDesc === "asc"
-                ? a.amountOfBill - b.amountOfBill
-                : b.amountOfBill - a.amountOfBill
-            )
+                ? Date.parse(a.monthOfBill) - Date.parse(b.monthOfBill)
+                : Date.parse(b.monthOfBill) - Date.parse(a.monthOfBill)
         )
-       
+        )
         ascDesc === "asc"
             ? setAscDsc("desc")
             : setAscDsc("asc")
     }
 
+    const sortByAmount = () => {
+        setFilterData(filterData.sort((a, b) =>
+            ascDesc === "asc"
 
+                ? (a.amountOfBill) - (b.amountOfBill)
+                : (b.amountOfBill) - (a.amountOfBill)
+        )
+        )
+        ascDesc === "asc"
+            ? setAscDsc("desc")
+            : setAscDsc("asc")
+    }
 
+    const sortByRecipient = () => {
+        setFilterData(filterData.sort((a, b) =>
+            ascDesc === "asc"
+                ? a.recipientOfBill.localeCompare(b.recipientOfBill)
+                : b.recipientOfBill.localeCompare(a.recipientOfBill)
+        )
 
+        )
+        ascDesc === "asc"
+            ? setAscDsc("desc")
+            : setAscDsc("asc")
+    }
 
+    const sortByChecked = () => {
+        setFilterData(filterData.sort((a, b) =>
+            ascDesc === "asc"
+                ? a.isPaid - b.isPaid
+                : b.isPaid - a.isPaid
+        )
+        )
+        ascDesc === "asc"
+            ? setAscDsc("desc")
+            : setAscDsc("asc")
+    }
+
+    console.log(filterData)
 
     return (
         <>
@@ -103,10 +84,11 @@ function BillsDisplay({ billsData }) {
                     <caption>Zestawienie rachunków</caption>
                     <thead>
                         <tr>
-                            <th>Miesiąc<button onClick={sortBy}> filtr   </button> </th>
-                            <th>Kwota <button onClick={() => setAscDsc(!ascDesc)}> filtr   </button></th>
-                            <th>Odbiorca <button onClick={() => setAscDsc(!ascDesc)}> filtr   </button></th>
-                            <th>Zapłacono <button onClick={() => setAscDsc(!ascDesc)}> filtr   </button> </th>
+
+                            <th>Miesiąc<button onClick={sortByDate} > filtr   </button> </th>
+                            <th>Kwota <button onClick={sortByAmount}> filtr   </button></th>
+                            <th>Odbiorca <button onClick={sortByRecipient}> filtr   </button></th>
+                            <th>Zapłacono <button onClick={sortByChecked}> filtr   </button> </th>
                         </tr>
                     </thead>
                     <tbody>
