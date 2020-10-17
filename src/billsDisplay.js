@@ -2,26 +2,25 @@ import React, { useEffect, useState } from "react";
 import IsPaid from './isPaid';
 import SearchBill from "./searchBill";
 import TableFoot from "./tableFoot";
-import ClientChange from "./clientChange";
+import PropertyChange from "./propertyChange";
 
 function BillsDisplay({ billsData }) {
     const [filterStart, setFilterStart] = useState("2020-01-20");
     const [filterEnd, setFilterEnd] = useState((new Date().toISOString().slice(0, 10)));
-    const [client, setClient] = useState('Wszyscy')
+    const [propertyDisplay, setPropertyDisplay] = useState('Wszyscy')
     const [filterData, setFilterData] = useState(billsData)
 
    
 
     useEffect(() => {
         setFilterData(billsData.filter(bill => {
-            return (  ( (client === "Wszyscy") ? typeof bill.clientId === 'string' || bill.clientId instanceof String : client === bill.clientId ) &&
+            return (  ( (propertyDisplay === "Wszyscy") ?  typeof bill.property === 'string' || bill.property instanceof String : propertyDisplay === bill.property ) &&
                 (Date.parse(bill.monthOfBill)) > (Date.parse(new Date([(filterStart.slice(0, 4)), (filterStart.slice(5, 7)), (filterStart.slice(8, 10))])))
                 && ((Date.parse(bill.monthOfBill)) < (Date.parse(new Date([(filterEnd.slice(0, 4)), (filterEnd.slice(5, 7)), (filterEnd.slice(8, 10))])))
-               
                 ))
         }))
 
-    }, [filterStart, filterEnd, billsData,client])
+    }, [filterStart, filterEnd, billsData,propertyDisplay])
 
     const [ascDesc, setAscDsc] = useState("asc")
 
@@ -73,7 +72,7 @@ function BillsDisplay({ billsData }) {
     return (
         <>
             <div>
-                <ClientChange billsData = { billsData }client = {client} setClient = {setClient}/>
+                <PropertyChange billsData = { billsData } propertyDisplay = {propertyDisplay} setPropertyDisplay = {setPropertyDisplay}/>
                 <SearchBill filterStart={filterStart} setFilterStart={setFilterStart} filterEnd={filterEnd} setFilterEnd={setFilterEnd} />
                 <table>
                     <caption>Zestawienie rachunków</caption>
@@ -83,6 +82,7 @@ function BillsDisplay({ billsData }) {
                             <th>Kwota <button onClick={sortByAmount}> filtr   </button></th>
                             <th>Odbiorca <button onClick={sortByRecipient}> filtr   </button></th>
                             <th>Zapłacono <button onClick={sortByChecked}> filtr   </button> </th>
+                            <th>Nieruchomość <button onClick={console.log("abc")}> filtr   </button> </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,6 +92,7 @@ function BillsDisplay({ billsData }) {
                                 <td> {bill.amountOfBill} zł</td>
                                 <td> {bill.recipientOfBill}</td>
                                 <IsPaid bill={bill} />
+                                <td>{bill.property}</td>
                             </tr>)}
                     </tbody>
          

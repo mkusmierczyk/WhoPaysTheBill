@@ -17,7 +17,7 @@ function Table() {
 
     return (
         <>
-            <AddBill/>
+            <AddBill billsData={ billsData }/>
             <BillsDisplay billsData={ billsData } />
             </>
     );

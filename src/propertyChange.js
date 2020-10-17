@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function ClientChange({ billsData, client, setClient }) {
+function PropertyChange({ billsData, propertyDisplay, setPropertyDisplay }) {
   
     const [clientsData, setClientsData] = useState(billsData)
 
@@ -18,21 +18,21 @@ function ClientChange({ billsData, client, setClient }) {
     }
     
     useEffect( () =>{
-        removeDuplicates(billsData,"clientId")
+        removeDuplicates(billsData,"property")
     },[billsData]);
 
     return (
         <>
             <select
-                value={client} onChange={(event) => setClient(event.target.value)}>  
+                value={propertyDisplay} onChange={(event) => setPropertyDisplay(event.target.value)}>  
                 <option value = {"Wszyscy"}>Wszyscy</option>
                 {billsData !== false && clientsData.map((bill) => 
-                <option key = {bill.clientId}
-                    value= {bill.clientId} > {bill.clientId}
+                <option key = {bill.property}
+                    value= {bill.property} > {bill.property}
                 </option> )}
             </select>
         </>
     );
 }
 
-export default ClientChange;
+export default PropertyChange;

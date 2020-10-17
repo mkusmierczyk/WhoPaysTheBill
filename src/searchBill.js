@@ -10,8 +10,8 @@ function SearchBill({filterStart, setFilterStart, filterEnd, setFilterEnd}) {
                            pattern="\d{4}-\d{2}-\d{2}" value={filterStart}
                             onChange={(event) => setFilterStart(event.target.value)}/>
                 </label>
-                <label > do:
-                    <input type="date" value={filterEnd}
+                <label > 
+                    <input value={filterEnd}
                            onChange={(event) => setFilterEnd( event.target.value)}/>
                 </label>
             </div>
