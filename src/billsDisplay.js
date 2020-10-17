@@ -7,17 +7,21 @@ import ClientChange from "./clientChange";
 function BillsDisplay({ billsData }) {
     const [filterStart, setFilterStart] = useState("2020-01-20");
     const [filterEnd, setFilterEnd] = useState((new Date().toISOString().slice(0, 10)));
+    const [client, setClient] = useState('Wszyscy')
     const [filterData, setFilterData] = useState(billsData)
 
    
 
     useEffect(() => {
         setFilterData(billsData.filter(bill => {
-            return ((Date.parse(bill.monthOfBill)) > (Date.parse(new Date([(filterStart.slice(0, 4)), (filterStart.slice(5, 7)), (filterStart.slice(8, 10))])))
-                && ((Date.parse(bill.monthOfBill)) < (Date.parse(new Date([(filterEnd.slice(0, 4)), (filterEnd.slice(5, 7)), (filterEnd.slice(8, 10))])))))
+            return (  ( (client === "Wszyscy") ? typeof bill.clientId === 'string' || bill.clientId instanceof String : client === bill.clientId ) &&
+                (Date.parse(bill.monthOfBill)) > (Date.parse(new Date([(filterStart.slice(0, 4)), (filterStart.slice(5, 7)), (filterStart.slice(8, 10))])))
+                && ((Date.parse(bill.monthOfBill)) < (Date.parse(new Date([(filterEnd.slice(0, 4)), (filterEnd.slice(5, 7)), (filterEnd.slice(8, 10))])))
+               
+                ))
         }))
 
-    }, [filterStart, filterEnd, billsData])
+    }, [filterStart, filterEnd, billsData,client])
 
     const [ascDesc, setAscDsc] = useState("asc")
 
@@ -69,7 +73,7 @@ function BillsDisplay({ billsData }) {
     return (
         <>
             <div>
-                <ClientChange filterData = {filterData} />
+                <ClientChange billsData = { billsData }client = {client} setClient = {setClient}/>
                 <SearchBill filterStart={filterStart} setFilterStart={setFilterStart} filterEnd={filterEnd} setFilterEnd={setFilterEnd} />
                 <table>
                     <caption>Zestawienie rachunków</caption>

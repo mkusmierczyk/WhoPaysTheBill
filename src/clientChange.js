@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+function ClientChange({ billsData, client, setClient }) {
+  
+    const [clientsData, setClientsData] = useState(billsData)
 
-function ClientChange({ filterData }) {
-    const [client, setClient] = useState('Wszyscy')
-    const [clientsData, setClientsData] = useState(false)
     
     function removeDuplicates(array, key) {
         let lookup = {};
@@ -13,32 +13,22 @@ function ClientChange({ filterData }) {
                 lookup[array[i][key]] = true;
                 result.push(array[i]);
             }
-            
         }
         return setClientsData(result);
     }
-  
-
     
     useEffect( () =>{
-       
-        removeDuplicates(filterData,"clientId")
- 
-
-    },[filterData]);
-
-
-   
-
+        removeDuplicates(billsData,"clientId")
+    },[billsData]);
 
     return (
         <>
             <select
                 value={client} onChange={(event) => setClient(event.target.value)}>  
                 <option value = {"Wszyscy"}>Wszyscy</option>
-                {clientsData !== false && clientsData.map((bill) => 
-                <option
-                    value= {bill.clientId}> {bill.clientId}
+                {billsData !== false && clientsData.map((bill) => 
+                <option key = {bill.clientId}
+                    value= {bill.clientId} > {bill.clientId}
                 </option> )}
             </select>
         </>
