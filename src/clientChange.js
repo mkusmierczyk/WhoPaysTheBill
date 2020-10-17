@@ -4,20 +4,39 @@ import React, { useEffect, useState } from 'react';
 function ClientChange({ filterData }) {
     const [client, setClient] = useState('Wszyscy')
     const [clientsData, setClientsData] = useState(false)
+    
+    function removeDuplicates(array, key) {
+        let lookup = {};
+        let result = [];
+        for(let i=0; i<array.length; i++) {
+            if(!lookup[array[i][key]]){
+                lookup[array[i][key]] = true;
+                result.push(array[i]);
+            }
+            
+        }
+        return setClientsData(result);
+    }
   
 
     
     useEffect( () =>{
-    setClientsData(filterData.filter((value, index) => filterData.indexOf(value.clientId) === index))
+       
+        removeDuplicates(filterData,"clientId")
+ 
 
-    },[]);
+    },[filterData]);
+
+
+   
+
 
     return (
         <>
             <select
                 value={client} onChange={(event) => setClient(event.target.value)}>  
                 <option value = {"Wszyscy"}>Wszyscy</option>
-                {filterData !== false && filterData.map((bill) => 
+                {clientsData !== false && clientsData.map((bill) => 
                 <option
                     value= {bill.clientId}> {bill.clientId}
                 </option> )}
