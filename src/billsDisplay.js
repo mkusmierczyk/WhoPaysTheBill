@@ -3,6 +3,7 @@ import IsPaid from './isPaid';
 import SearchBill from "./searchBill";
 import TableFoot from "./tableFoot";
 import PropertyChange from "./propertyChange";
+import IsDeleted from "./isDeleted";
 
 function BillsDisplay({ billsData }) {
     const [filterStart, setFilterStart] = useState("2020-01-20");
@@ -93,10 +94,13 @@ function BillsDisplay({ billsData }) {
                                 <td> {bill.recipientOfBill}</td>
                                 <IsPaid bill={bill} />
                                 <td>{bill.property}</td>
+                                <IsDeleted filterData = {filterData} setFilterData = {setFilterData} bill={bill}/>
+
                             </tr>)}
                     </tbody>
          
                             <TableFoot filterData = {filterData} />
+                            
                 </table>
             </div>
         </>

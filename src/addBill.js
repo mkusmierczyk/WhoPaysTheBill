@@ -5,6 +5,7 @@ function AddBill({ billsData }) {
     const [clientID, setClientID] = useState("ID")
     const [property, setProperty] = useState("")
     const [display, setDisplay] = useState(false)
+    const [newValue, setNewValue] = useState("")
 
     const [amount, setAmount] = useState(0)
     const [month, setMonth] = useState('2020-01-30')
@@ -12,7 +13,7 @@ function AddBill({ billsData }) {
     const [record, setRecord] = useState(false)
 
     const submit = () => {
-        setRecord({
+        (newValue === "") ? setRecord({
             clientId: clientID,
             property: property,
             amountOfBill: +amount,
@@ -20,6 +21,19 @@ function AddBill({ billsData }) {
             recipientOfBill: recipient,
             isPaid: false,
         })
+        :setRecord({
+            clientId: clientID,
+            property: newValue,
+            amountOfBill: +amount,
+            monthOfBill: new Date(month.slice(0, 4), month.slice(6, 7), month.slice(8, 10)),
+            recipientOfBill: recipient,
+            isPaid: false,
+        })
+
+        setAmount(0)
+        setNewValue("")
+        setProperty("")
+        
     }
 
     useEffect(() => {
@@ -47,7 +61,7 @@ function AddBill({ billsData }) {
                 pattern="\d{4}-\d{2}-\d{2}" value={month} onChange={(event) => setMonth(event.target.value)}>
 
             </input>
-            <select
+            <select 
                 value={recipient} onChange={(event) => setRecipient(event.target.value)}>
                 <option
                     value="Gaz">Gaz
@@ -67,7 +81,7 @@ function AddBill({ billsData }) {
                     <option value={"dodaj"}> Dodaj</option>
             </select>
             <div style={{ display: display === true ? "block" : "none" }}>
-                <input value={property} onChange={(event) => setProperty(event.target.value)} />
+                <input value={newValue} onChange={(event) => setNewValue(event.target.value)} />
             </div>
 
             <button onClick={submit} value={"Zapisz"}>Zapisz</button>
