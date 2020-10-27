@@ -6,11 +6,11 @@ function IsPaid({bill}) {
     const db = firebase.firestore()
     useEffect(() => {
         setChangeIsPaid(!bill.isPaid)
-    }, [isPaid])
+    }, [bill.isPaid])
 
     return (
         <>
-                <input type={'checkbox'} value={!isPaid}  checked={!isPaid}
+                <input type={'checkbox'} value={!isPaid}  defaultChecked={!isPaid}
                    onClick={() => (db.collection("bills").doc(bill.id).set({...bill, isPaid})) }/>
         </>
     )

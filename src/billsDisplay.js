@@ -83,7 +83,7 @@ function BillsDisplay({ billsData }) {
                             <th>Kwota <button onClick={sortByAmount}> filtr   </button></th>
                             <th>Odbiorca <button onClick={sortByRecipient}> filtr   </button></th>
                             <th>Zapłacono <button onClick={sortByChecked}> filtr   </button> </th>
-                            <th>Nieruchomość <button onClick={console.log("abc")}> filtr   </button> </th>
+                            <th>Nieruchomość <button > filtr   </button> </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,9 +92,9 @@ function BillsDisplay({ billsData }) {
                                 <td> {bill.monthOfBill.slice(0, 10)} </td>
                                 <td> {bill.amountOfBill} zł</td>
                                 <td> {bill.recipientOfBill}</td>
-                                <IsPaid bill={bill} />
+                              <td>  <IsPaid bill={bill} /></td>
                                 <td>{bill.property}</td>
-                                <IsDeleted filterData = {filterData} setFilterData = {setFilterData} bill={bill}/>
+                               <td> <IsDeleted filterData = {filterData} setFilterData = {setFilterData} bill={bill}/></td>
 
                             </tr>)}
                     </tbody>

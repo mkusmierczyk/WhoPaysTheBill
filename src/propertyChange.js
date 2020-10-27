@@ -26,8 +26,8 @@ function PropertyChange({ billsData, propertyDisplay, setPropertyDisplay }) {
             <select
                 value={propertyDisplay} onChange={(event) => setPropertyDisplay(event.target.value)}>  
                 <option value = {"Wszyscy"}>Wszyscy</option>
-                {billsData !== false && clientsData.map((bill) => 
-                <option key = {bill.property}
+                {billsData !== false && clientsData.map((bill,index) => 
+                <option key = {index}
                     value= {bill.property} > {bill.property}
                 </option> )}
             </select>
