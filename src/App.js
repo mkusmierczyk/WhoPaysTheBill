@@ -2,9 +2,12 @@ import React from 'react';
 import Table from "./table";
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import BillsDivide from './billsDivide';
+
 
 function App() {
-    const app = firebase.initializeApp( {
+    const app = firebase.initializeApp({
         apiKey: "AIzaSyBFskPezbFasOXAl6CVnOdyVBB XGseCMRE",
         authDomain: "whopaysthebill-42935.firebaseapp.com",
         databaseURL: "https://whopaysthebill-42935.firebaseio.com",
@@ -16,9 +19,10 @@ function App() {
     });
     return (
         <div className="App">
-            <Table/>
-
-
+            <Router>
+            <Route exact path="/"> <Table /></Route>
+                <Route path="/podziel_rachunek"><BillsDivide /></Route>
+            </Router>
         </div>
     );
 }

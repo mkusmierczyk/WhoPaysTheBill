@@ -11,8 +11,6 @@ function BillsDisplay({ billsData }) {
     const [propertyDisplay, setPropertyDisplay] = useState('Wszyscy')
     const [filterData, setFilterData] = useState(billsData)
 
-   
-
     useEffect(() => {
         setFilterData(billsData.filter(bill => {
             return (  ( (propertyDisplay === "Wszyscy") ?  typeof bill.property === 'string' || bill.property instanceof String : propertyDisplay === bill.property ) &&
