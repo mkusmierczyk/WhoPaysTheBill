@@ -73,7 +73,7 @@ function BillsDisplay({ billsData }) {
             <div>
                 <PropertyChange billsData = { billsData } propertyDisplay = {propertyDisplay} setPropertyDisplay = {setPropertyDisplay}/>
                 <SearchBill filterStart={filterStart} setFilterStart={setFilterStart} filterEnd={filterEnd} setFilterEnd={setFilterEnd} />
-                <table>
+                <table className = {'styled-table'}>
                     <caption>Zestawienie rachunków</caption>
                     <thead>
                         <tr>
@@ -86,7 +86,7 @@ function BillsDisplay({ billsData }) {
                     </thead>
                     <tbody>
                         {filterData !== false && filterData.map((bill) =>
-                            <tr key={bill.id}>
+                            <tr key={bill.id} className = {'active-row'}>
                                 <td> {bill.monthOfBill.slice(0, 10)} </td>
                                 <td> {bill.amountOfBill} zł</td>
                                 <td> {bill.recipientOfBill}</td>

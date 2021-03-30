@@ -3,6 +3,7 @@ import AddBill from "./addBill";
 import BillsDisplay from "./billsDisplay";
 import * as firebase from "firebase";
 
+
 function Table() {
     const [billsData, setBillsData] = useState([])
     useEffect(() => {

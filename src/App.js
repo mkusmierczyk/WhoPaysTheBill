@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import BillsDivide from './billsDivide';
+import './saas/_main.scss';
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         measurementId: "G-ECLHGS21B5"
     });
     return (
-        <div className="App">
+        <div className="App container">
             <Router>
             <Route exact path="/"> <Table /></Route>
                 <Route path="/podziel_rachunek"><BillsDivide /></Route>
